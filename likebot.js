@@ -86,11 +86,11 @@ casper.waitForSelector("form[class='_3bqd5']", function() {
 				fs.write(save, this.getPageContent() + '\n', 'w');
 				this.click("div._hcch2 span button._jvpff");
 			});*/
-			casper.thenOpen('https://instagram.com/toshikijahja', function() {
+			casper.thenOpen('https://www.instagram.com/p/BEjf1ZHBeFv/?taken-by=toshikijahja', function() {
 				fname = "profilePage.html";
 				save = fs.pathJoin(fs.workingDirectory, 'nwaomachux', fname);
 				fs.write(save, this.getPageContent() + '\n', 'w');
-				this.click("div._hcch2 span button._jvpff");
+				this.click("a._ebwb5 _1tv0k _345gm coreSpriteHeartOpen");
 			});
 			// logout
 			casper.thenOpen('https://www.instagram.com/' + username, function() {
