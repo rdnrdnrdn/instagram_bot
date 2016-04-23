@@ -97,6 +97,17 @@ casper.waitForSelector("form[class='_rwf8p']", function() {
 			this.click("div._hcch2 span button._jvpff");
 		});
 	});*/
+	casper.wait(4000, function() {
+		casper.thenOpen('https://www.instagram.com/p/BEjf1ZHBeFv/?taken-by=toshikijahja', function() {
+			fname = "profilePage.html";
+			save = fs.pathJoin(fs.workingDirectory, 'nwaomachux', fname);
+			fs.write(save, this.getPageContent() + '\n', 'w');
+			casper.wait(3000, function() {
+				this.click("div section a._ebwb5");
+			});
+			
+		});
+	});
 });
 
 casper.waitForSelector("div div span._9ea4j", function() {
