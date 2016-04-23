@@ -18,17 +18,44 @@ var casper = require('casper').create({
 	verbose: true,
 	logLevel: "debug"
 });
-var prefix = "badabudibada";
-var suffix = "testlaptop" + count;
-var username = prefix + suffix;
-var email = prefix + "+" + suffix + "@gmail.com";
-var fullname = "badabudi";
+
+var username = "";
+var email = "";
+var fullname = "";
+var last = "";
 var password = "budibadabudi";
+var url = "http://www.behindthename.com/random/random.php?number=2&gender=both&surname=&all=no&usage_ins=1";
 
-
-casper.start('https://www.instagram.com', function() {
-	fs.write(save, this.getPageContent() + '\n', 'w');
+// create random name
+casper.start(url, function(data) {
+	if (this.exists('.heavyhuge')) {
+        var str = this.fetchText('.heavyhuge');
+        var name = str.split(" ");
+        console.log("name[1]: " + name[1]);
+        console.log("name[2]: " + name[2]);
+        console.log("name[3]: " + name[3]);
+        if(name[2] == "") {
+        	last = name[3];
+        } else {
+        	last = name[2];
+        }
+        fullname = name[1] + " " + last;
+        username = name[1] + last + "1993";
+        email = name[1] + last + "@test.com";
+        console.log(username);
+    } else {
+        console.log('.heavyhuge', 'ERROR');
+    }
 });
+
+
+phantom.clearCookies();
+
+
+casper.thenOpen('https://www.instagram.com', function() {
+    fs.write(save, this.getPageContent() + '\n', 'w');
+});
+
 
 casper.userAgent('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.110 Safari/537.36');
 
@@ -52,8 +79,21 @@ casper.waitForSelector("form[class='_3bqd5']", function() {
 			save = fs.pathJoin(fs.workingDirectory, 'nwaomachux', fname);
 			fs.write(save, this.getPageContent() + '\n', 'w');
 
+			
+			/*casper.start('https://instagram.com/farandyramadhana', function() {
+				fname = "profilePage.html";
+				save = fs.pathJoin(fs.workingDirectory, 'nwaomachux', fname);
+				fs.write(save, this.getPageContent() + '\n', 'w');
+				this.click("div._hcch2 span button._jvpff");
+			});*/
+			casper.thenOpen('https://instagram.com/toshikijahja', function() {
+				fname = "profilePage.html";
+				save = fs.pathJoin(fs.workingDirectory, 'nwaomachux', fname);
+				fs.write(save, this.getPageContent() + '\n', 'w');
+				this.click("div._hcch2 span button._jvpff");
+			});
 			// logout
-			casper.start('https://www.instagram.com/' + username, function() {
+			casper.thenOpen('https://www.instagram.com/' + username, function() {
 				fname = "profilePage.html";
 				save = fs.pathJoin(fs.workingDirectory, 'nwaomachux', fname);
 				fs.write(save, this.getPageContent() + '\n', 'w');
@@ -66,14 +106,13 @@ casper.waitForSelector("form[class='_3bqd5']", function() {
 					count++;
 				});
 			});
-			/*casper.start('https://instagram.com/farandyramadhana', function() {
-				fname = "profilePage.html";
-				save = fs.pathJoin(fs.workingDirectory, 'nwaomachux', fname);
-				fs.write(save, this.getPageContent() + '\n', 'w');
-				this.click("div._hcch2 span button._jvpff");
-			});*/
 		});
 	});
+
+
+
+// follow
+
 
 casper.run();
 
