@@ -24,23 +24,27 @@ var email = "";
 var fullname = "";
 var last = "";
 var password = "budibadabudi";
-var url = "http://www.behindthename.com/random/random.php?number=2&gender=both&surname=&all=no&usage_ins=1";
+var url = "http://www.behindthename.com/random/random.php?number=3&gender=both&surname=&all=no&usage_ins=1";
 
 // create random name
 casper.start(url, function(data) {
 	if (this.exists('.heavyhuge')) {
         var str = this.fetchText('.heavyhuge');
         var name = str.split(" ");
+        console.log(name);
         console.log("name[1]: " + name[1]);
         console.log("name[2]: " + name[2]);
         console.log("name[3]: " + name[3]);
+        console.log("name[4]: " + name[4])
+        console.log("name[5]: " + name[5])
         if(name[2] == "") {
         	last = name[3];
         } else {
         	last = name[2];
         }
         fullname = name[1] + " " + last;
-        username = name[1] + last + Math.floor((Math.random() * 10)) + Math.floor((Math.random() * 10)) + Math.floor((Math.random() * 10));
+        // Math.floor((Math.random() * 10)) + Math.floor((Math.random() * 10)) + Math.floor((Math.random() * 10))
+        username = name[1] + last + name[5];
         email = last  + "@" + name[1] + ".com";
         console.log(username);
     } else {
