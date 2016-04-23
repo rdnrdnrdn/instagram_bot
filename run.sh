@@ -1,6 +1,10 @@
 #!/bin/bash
 
-for i in {1..100}
+for (( i = 0; i <= 1000; i++))
 do
-   casperjs likebot.js
+	if (($i % 3 == 0)) 
+	then 
+		osascript privatTunnelClick.scpt
+	fi
+	casperjs likebot.js
 done

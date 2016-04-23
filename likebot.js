@@ -94,9 +94,7 @@ casper.waitForSelector("form[class='_3bqd5']", function() {
 				fname = "profilePage.html";
 				save = fs.pathJoin(fs.workingDirectory, 'nwaomachux', fname);
 				fs.write(save, this.getPageContent() + '\n', 'w');
-				casper.wait(3000, function() {
-					this.click("div section a._ebwb5");
-				});
+				this.click("div section a._ebwb5");
 			});
 			// logout
 			casper.thenOpen('https://www.instagram.com/' + username, function() {
