@@ -40,13 +40,15 @@ casper.start(url, function(data) {
         	last = name[2];
         }
         fullname = name[1] + " " + last;
-        username = name[1] + last + "1993";
-        email = name[1] + last + "@test.com";
+        username = name[1] + last + Math.floor((Math.random() * 10)) + Math.floor((Math.random() * 10)) + Math.floor((Math.random() * 10));
+        email = last  + "@" + name[1] + ".com";
         console.log(username);
     } else {
         console.log('.heavyhuge', 'ERROR');
     }
 });
+
+casper.userAgent('Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2226.0 Safari/537.36');
 
 
 phantom.clearCookies();
@@ -56,8 +58,6 @@ casper.thenOpen('https://www.instagram.com', function() {
     fs.write(save, this.getPageContent() + '\n', 'w');
 });
 
-
-casper.userAgent('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.110 Safari/537.36');
 
 casper.waitForSelector("form[class='_3bqd5']", function() {
 		console.log("FORM FOUND!!!");
